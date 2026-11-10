@@ -1,0 +1,34 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://lesson:lesson@db:5432/lesson
+      DATA_DIR: /data
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - lesson-data:/data
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: lesson
+      POSTGRES_PASSWORD: lesson
+      POSTGRES_DB: lesson
+    volumes:
+      - lesson-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lesson -d lesson"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+volumes:
+  lesson-data:
+  lesson-db:

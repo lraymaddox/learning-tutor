@@ -44,10 +44,13 @@ The tutor is a separate agent that runs at play time, not during generation.
 
 ## Decisions already made
 
-- **Providers are chosen per component** (seven components: paper reader,
-  lesson planner, narration writer, board artist, narrator voice, quiz writer,
-  tutor). First version: Anthropic, OpenAI, Google, OpenRouter for text;
-  ElevenLabs, OpenAI, Google for voice.
+- **Providers are chosen per component** (paper reader, lesson planner,
+  narration writer, board artist, narrator voice, quiz writer, tutor, plus the
+  eval judge). First version: Anthropic, OpenAI, Google, OpenRouter for text;
+  ElevenLabs, OpenAI, Google for voice. A built-in demo provider needs no keys
+  and produces placeholder lessons, for trying the app and for tests.
+- **The orchestrator is code, not a model.** It decides order, redos and flags
+  deterministically; only the specialists, judge and tutor call models.
 - **The board is vector strokes produced by a text model**, not generated
   images. This is what makes stroke-level sync possible.
 - **Sync is anchored to word timestamps.** Every board cue is pinned to a word
