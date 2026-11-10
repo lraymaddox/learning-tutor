@@ -2,7 +2,7 @@ services:
   app:
     build: .
     ports:
-      - "8000:8000"
+      - "8080:8000"
     environment:
       DATABASE_URL: postgresql://lesson:lesson@db:5432/lesson
       DATA_DIR: /data

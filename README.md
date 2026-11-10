@@ -10,7 +10,7 @@ and `eval.md` for what "good" means.
 docker compose up --build
 ```
 
-Open http://localhost:8000.
+Open http://localhost:8080.
 
 1. **Models**: paste API keys, press Save, then choose a provider and model for
    each component (model lists load from the provider once its key is saved).
